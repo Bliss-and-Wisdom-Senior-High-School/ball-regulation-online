@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { React } from "react";
+import Home from "./page/home";
+import DashBoard from"./page/dashboard";
+import styled from "@emotion/styled";
 
-function App() {
+const Title = styled.div`
+  text-align: center;
+`;
+
+
+const App = () => {
+ 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Title>
+      <BrowserRouter>
+        <NavLink to="/">Home</NavLink>   home    <NavLink to="/dashboard">dashboard</NavLink>
+        <Routes>
+          <Route path="/*" element={<Home />} />
+          <Route path="/dashboard/*" element={<DashBoard />} />
+      </Routes>
+    </BrowserRouter>
+    </ Title>
   );
 }
-
 export default App;
+
+
+//https://mui.com/zh/components/toggle-button/#standalone-toggle-button
