@@ -1,4 +1,4 @@
-import {REact, useState} from 'react';
+import { useState } from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
@@ -35,7 +35,7 @@ const Option = () => {
       exclusive
       onChange={handleChange}
     >
-        <ToggleButton value="point" onClick={InputPoint}>point</ToggleButton>
+        <ToggleButton value="point">point</ToggleButton>
         <ToggleButton value="lend">lend</ToggleButton>
         <ToggleButton value="return">return</ToggleButton>
       </ToggleButtonGroup>
