@@ -23,7 +23,7 @@ const InputPoint = () =>{
                 ><ThumbUpAltIcon
                     fontSize="large"
                     style={{
-                        color: `${point === "good" ? '#ff7043' : '546e7a'}`,
+                        color: `${point === "good" ? '#ff7043' : '#546e7a'}`,
                 }}/>
             </IconButton>
             <IconButton 
@@ -32,7 +32,7 @@ const InputPoint = () =>{
                 ><ThumbDownAltIcon 
                     fontSize="large"
                     style={{
-                        color: `${point === "bad" ? '#ff7043' : '546e7a'}`
+                        color: `${point === "bad" ? '#ff7043' : '#546e7a'}`
                 }}/>
             </IconButton>
             <div style={{padding: '10px'}}></div>
