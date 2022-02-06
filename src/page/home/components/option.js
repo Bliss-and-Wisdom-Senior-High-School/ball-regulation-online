@@ -24,8 +24,6 @@ const Option = () => {
     setAlignment(newAlignment);
   };
 
-  console.log(alignment);
-  
   
   return (
     <>
