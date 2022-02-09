@@ -20,7 +20,7 @@ const OptionEffect = (props) => {
     if(ball === 'volleyball'){
         return(<>
         <form>
-            <InputClass />
+            
             <Text>球數</Text>
             <Input type="Bigint" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}/>
         </form>
@@ -30,7 +30,7 @@ const OptionEffect = (props) => {
     return(
     <>
         <form style={{overflow: 'hidden'}}>
-            <InputClass />
+            
             <Text>球數</Text>
             <Input type="Bigint" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}/>
             <Text>拍數</Text>

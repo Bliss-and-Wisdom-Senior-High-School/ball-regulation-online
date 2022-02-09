@@ -20,7 +20,7 @@ const InputPoint = () =>{
         <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}} >
         <h1>點數</h1>
             <form>
-            <InputClass></InputClass>
+            <InputClass />
             <IconButton 
                 aria-label="ThumbUpAlt" 
                 onClick={() => setpoint("good")}

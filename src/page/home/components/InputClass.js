@@ -1,7 +1,48 @@
 import { useState, useEffect, Fragment } from 'react';
-import  TextField  from "@mui/material/TextField";
-import  Autocomplete  from "@mui/material/Autocomplete";
-import CircularProgress from '@mui/material/CircularProgress';
+//import  TextField  from "@mui/material/TextField";
+//import  Autocomplete  from "@mui/material/Autocomplete";
+import { collection, getDocs} from "firebase/firestore";
+import {db} from '../../../utils/firebase';
+
+const InputClass = () =>{
+  const [classname, setClassname] = useState([]);
+  const classref = collection(db, "class");
+
+  useEffect(() =>{
+      const getClass = async() =>{
+        const data = await getDocs(classref);
+        console.log(data);
+        setClassname(data.docs.map((doc) => ({...doc.data()})));
+        console.log(classname);
+        console.log('test');
+      };
+
+      getClass();
+  },[])
+  
+
+
+  return(
+    <>
+    </>
+  )
+};
+
+export default InputClass;
+
+
+
+
+/* 
+(collectionSnapshot) => {
+        collectionSnapshot.docs.map{
+          return doc.data();
+        }
+         
+      }
+
+
+
 
 function sleep(delay = 0) {
     return new Promise((resolve) => {
@@ -16,7 +57,14 @@ function sleep(delay = 0) {
   
     useEffect(() => {
       let active = true;
-
+      firebase.compat.firestore().collection("ball")
+      .get()
+      .then((collectionSnapshot) => {
+        const data = collectionSnapshot.docs.map(doc => {
+          return doc.data;
+        });
+        console.log(data);
+      })
       if (!loading) {
         return undefined;
       }
@@ -75,7 +123,7 @@ function sleep(delay = 0) {
   }
   
 
-  export default InputClass;
+  export default InputClass; */
   // class name in B&W
   const classname = [
     { name: '高三忠', year: 1994 },
