@@ -1,11 +1,21 @@
 import Card from '@mui/material/Card';
+import styled from '@emotion/styled';
 
-const InputReturn = () =>{
+import BallType from'./BallType';
+
+const Space = styled.div`
+    padding: 15%
+`;
+
+
+const InputLend = () => {
     return(
-        <Card sx={{padding: '20%'}}>
-            <p>return</p>
-        </ Card>
+        <Space>
+            <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}}>
+            <h1>還</h1>
+            <BallType/>
+        </Card>
+        </Space>
     );
 };
-
-export default InputReturn;
+export default InputLend;

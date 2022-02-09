@@ -28,7 +28,7 @@ const Option = () => {
   return (
     <>
       <ToggleButtonGroup
-      color="primary"
+      color="info"
       value={alignment}
       exclusive
       onChange={handleChange}

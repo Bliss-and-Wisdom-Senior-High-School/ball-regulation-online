@@ -22,7 +22,7 @@ function sleep(delay = 0) {
       }
   
       (async () => {
-        await sleep(1e3); // For demo purposes.
+        await sleep(1e1); // For demo purposes.
   
         if (active) {
           setOptions([...classname]);
@@ -43,7 +43,7 @@ function sleep(delay = 0) {
     return (
       <Autocomplete
         id="asynchronous-demo"
-        sx={{ width: '100%' }}
+        sx={{ width: '100%',fontSize: '20px' }}
         open={open}
         onOpen={() => {
           setOpen(true);

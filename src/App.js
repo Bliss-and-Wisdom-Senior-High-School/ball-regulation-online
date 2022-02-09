@@ -3,10 +3,17 @@ import { React } from "react";
 import Home from "./page/home";
 import DashBoard from"./page/dashboard";
 import styled from "@emotion/styled";
+import HomeIcon from '@mui/icons-material/Home';
+import StorageIcon from '@mui/icons-material/Storage';
 
 const Title = styled.div`
   text-align: center;
 `;
+
+
+
+const iconstyle = {color: '#1565c0',  fontSize: "50px"};
+
 
 
 const App = () => {
@@ -14,8 +21,8 @@ const App = () => {
 
   return (
     <Title>
-      <BrowserRouter>
-        <NavLink to="/">Home</NavLink>   home    <NavLink to="/dashboard">dashboard</NavLink>
+      <BrowserRouter style={{ display: 'flex', justifyContent: 'center'}}>
+        <NavLink to="/"><HomeIcon sx={iconstyle}  /></NavLink>            ball system                 <NavLink to="/dashboard"><StorageIcon sx={iconstyle} /></NavLink>
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/dashboard/*" element={<DashBoard />} />
