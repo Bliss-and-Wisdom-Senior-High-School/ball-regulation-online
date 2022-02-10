@@ -1,130 +1,55 @@
 import { useState, useEffect, Fragment } from 'react';
-//import  TextField  from "@mui/material/TextField";
-//import  Autocomplete  from "@mui/material/Autocomplete";
-import { collection, getDocs} from "firebase/firestore";
-import {db} from '../../../utils/firebase';
+import 'firebase/compat/firestore';
+import  TextField  from "@mui/material/TextField";
+import  Autocomplete  from "@mui/material/Autocomplete";
+import firebase from '../../../utils/firebase';
+
+
 
 const InputClass = () =>{
   const [classname, setClassname] = useState([]);
-  const classref = collection(db, "class");
+  useEffect(()=>{
+    firebase.firestore().
+    collection("class")
+    .get()
+    .then((collectionSnapshot) => {
+      const data = collectionSnapshot.docs.map(doc => {
+        return doc.data();
+      });
+      setClassname(data);
+    
+    });
+  },[]);
 
-  useEffect(() =>{
-      const getClass = async() =>{
-        const data = await getDocs(classref);
-        console.log(data);
-        setClassname(data.docs.map((doc) => ({...doc.data()})));
-        console.log(classname);
-        console.log('test');
-      };
-
-      getClass();
-  },[])
-  
-
-
+  console.log(classname);
   return(
-    <>
-    </>
+    <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={classname.map((classnmae => classnmae.name))}
+      sx={{ width: 300, alignContent: 'center' }}
+      renderInput={(params) => <TextField {...params} label="class" />}
+    />
   )
 };
 
 export default InputClass;
 
+/*
+{classname.map(classname => {
+      return(
+        <li Key="{classname.name}" >
+        {classname.name}
+        </li>
+      )
+    })}
 
 
 
-/* 
-(collectionSnapshot) => {
-        collectionSnapshot.docs.map{
-          return doc.data();
-        }
-         
-      }
 
 
-
-
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, delay);
-    });
-  }
-
-  const InputClass = () => {
-    const [open, setOpen] = useState(false);
-    const [options, setOptions] = useState([]);
-    const loading = open && options.length === 0;
-  
-    useEffect(() => {
-      let active = true;
-      firebase.compat.firestore().collection("ball")
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map(doc => {
-          return doc.data;
-        });
-        console.log(data);
-      })
-      if (!loading) {
-        return undefined;
-      }
-  
-      (async () => {
-        await sleep(1e1); // For demo purposes.
-  
-        if (active) {
-          setOptions([...classname]);
-        }
-      })();
-  
-      return () => {
-        active = false;
-      };
-    }, [loading]);
-  
-    useEffect(() => {
-      if (!open) {
-        setOptions([]);
-      }
-    }, [open]);
-  
-    return (
-      <Autocomplete
-        id="asynchronous-demo"
-        sx={{ width: '100%',fontSize: '20px' }}
-        open={open}
-        onOpen={() => {
-          setOpen(true);
-        }}
-        onClose={() => {
-          setOpen(false);
-        }}
-        isOptionEqualToValue={(option, value) => option.title === value.title}
-        getOptionLabel={(option) => option.name || ""}
-        options={options}
-        loading={loading}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="班級"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <Fragment>
-                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                  {params.InputProps.endAdornment}
-                </Fragment>
-              ),
-            }}
-          />
-        )}
-      />
-    );
-  }
-  
-
-  export default InputClass; */
-  // class name in B&W
+*/
+  /* class name in B&W
   const classname = [
     { name: '高三忠', year: 1994 },
     { name: '高三孝', year: 1972 },
@@ -138,4 +63,4 @@ function sleep(delay = 0) {
     { name: '國二孝', year: 1999 },
     { name: '國一忠', year: 2001},
     { name: '國一孝', year: 1980},
-  ];
+  ];*/

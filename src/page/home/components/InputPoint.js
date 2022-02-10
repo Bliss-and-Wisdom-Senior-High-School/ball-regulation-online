@@ -14,7 +14,7 @@ const Space = styled.div`
 
 const InputPoint = () =>{
     const [point, setpoint] = useState('');
-
+   
     return(
     <Space>
         <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}} >
