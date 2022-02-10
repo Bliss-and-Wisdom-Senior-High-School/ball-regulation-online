@@ -56,6 +56,11 @@ const InputPoint = () =>{
                 border:'0'}}></input>
             </form>
         </Card>
+        <Card sx={{p: 5}}></Card>
+        <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}} >
+
+        </Card>
+
     </Space>
     
     );

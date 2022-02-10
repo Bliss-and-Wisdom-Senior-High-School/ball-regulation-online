@@ -1,13 +1,12 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect} from 'react';
 import 'firebase/compat/firestore';
 import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
 
 
-
 const InputClass = () =>{
-  const [classname, setClassname] = useState([]);
+  const [classnames, setClassnames] = useState([]);
   useEffect(()=>{
     firebase.firestore().
     collection("class")
@@ -16,19 +15,18 @@ const InputClass = () =>{
       const data = collectionSnapshot.docs.map(doc => {
         return doc.data();
       });
-      setClassname(data);
+      setClassnames(data);
     
     });
   },[]);
 
-  console.log(classname);
   return(
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={classname.map((classnmae => classnmae.name))}
-      sx={{ width: 300, alignContent: 'center' }}
-      renderInput={(params) => <TextField {...params} label="class" />}
+      options={classnames.map((classnmaes => classnmaes.name))}
+      sx={{ width: 9/10}}
+      renderInput={(params) => <TextField  {...params} label="class" />}
     />
   )
 };
