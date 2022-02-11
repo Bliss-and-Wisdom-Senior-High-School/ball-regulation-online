@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "banclass",
         "bgcolor",
         "classnmaes",
         "firestore",
@@ -10,6 +11,7 @@
         "setgood",
         "setpoint",
         "tabletennis",
-        "tofirebase"
+        "tofirebase",
+        "togglebaned"
     ]
 }

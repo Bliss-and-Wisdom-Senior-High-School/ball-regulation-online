@@ -1,47 +1,11 @@
-import { useState, useEffect} from 'react';
+/*import { useState, useEffect} from 'react';
 import 'firebase/compat/firestore';
 import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
+*/
 
 
-const InputClass = () =>{
-  const [classnames, setClassnames] = useState([]);
-  const [name, setName] = useState("");
-  
-  useEffect(()=>{
-    firebase.firestore().
-    collection("class")
-    .get()
-    .then((collectionSnapshot) => {
-      const data = collectionSnapshot.docs.map(doc => {
-        return doc.data();
-      });
-      setClassnames(data);
-    
-    });
-  },[]);
-
-  return(
-    <>
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={classnames.map((classnmaes => classnmaes.name))}
-      sx={{ width: 9/10}}
-      inputValue={name}
-      onInputChange={(event, newInputValue) => {
-          setName(newInputValue);}}
-
-      renderInput={(params) => <TextField  {...params} label="class" />}
-    />
-    </>
-    
-    
-  )
-};
-
-export default InputClass;
 
 /*
 {classname.map(classname => {

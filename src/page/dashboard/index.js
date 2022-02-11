@@ -6,10 +6,9 @@ import firebase from '../../utils/firebase';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
 
@@ -17,8 +16,20 @@ import ListItem from '@mui/material/ListItem';
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
   useEffect(()=>{
-    firebase.firestore().
-    collection("class")
+    firebase.firestore()
+    .collection("class")
+    //.orderBy("point", 'desc')
+    .onSnapshot((collectionSnapshot)=>{
+      const data = collectionSnapshot.docs.map((docSnapshot) => {
+        const id = docSnapshot.id;
+        return {...docSnapshot.data(),id}
+      });
+      setClassnames(data);
+    });
+  
+
+
+    /*
     .get()
     .then((collectionSnapshot) => {
       const data = collectionSnapshot.docs.map((docSnapshot) => {
@@ -28,26 +39,51 @@ const ClassDashBoard = () => {
       setClassnames(data);
     
     });
+    */
   },[]);
+
 
   return(
     <Stack spacing={2} sx={{p:'14%'}}>
       {classnames.map((classname) => {
+        let color1 = "#48a999";
+        if (classname.ban === true){
+          color1 = "#f44336"
+        }
+
+        function togglebaned (){
+          if (classname.ban === true){
+            firebase
+            .firestore()
+            .collection("class")
+            .doc(classname.id)
+            .update({"ban": false}
+            )
+          }
+          else if(classname.ban === false) {
+            firebase
+            .firestore()
+            .collection("class").doc(classname.id)
+            .update({"ban": true, "point": 0})
+          } 
+        }
+          
+
         return(
-          <Card key={classname.id} sx={{pl: '8%',pr: '8%',pt: '20px',pb: '40px', bgcolor: '#48a999'}}>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#48a999',textAlign: 'left'} }>
+          <Card key={classname.id} sx={{pl: '8%',pr: '8%',pt: 1,pb: 3, bgcolor:  color1 }} >
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: color1 ,textAlign: 'left'} }>
               <h2>{classname.name}</h2>
               <ListItem sx={{alignItems: 'center'}}>
                 <ListItemIcon><ThumbUpAltIcon ></ThumbUpAltIcon></ListItemIcon>
                 <ListItemText>{classname.point}</ListItemText>
               </ListItem>
 
-              <ListItem>
+              <ListItem sx={{pt: 1, pb: 1}}>
                 <ListItemText><h3>排球</h3></ListItemText>
                 <ListItemText>球數</ListItemText><ListItemText>{classname.volleyball.ball}</ListItemText>
               </ListItem>
 
-              <ListItem>
+              <ListItem sx={{pt: 1, pb: 1}}>
                   <ListItemText><h3>羽球</h3></ListItemText>
                   <ListItemText>
                     <List>
@@ -57,7 +93,7 @@ const ClassDashBoard = () => {
                   </ListItemText>
               </ListItem>
 
-              <ListItem>
+              <ListItem sx={{pt: 1, pb: 1}}>
                   <ListItemText><h3>桌球</h3></ListItemText>
                   <ListItemText>
                     <List>
@@ -67,10 +103,14 @@ const ClassDashBoard = () => {
                   </ListItemText>
               </ListItem>
             </List>
-          </Card>
+            <Button 
+            sx = {{alignItems: 'left', bgcolor: '#ce93d8'}}
+            onClick={togglebaned}
+            >🚫</Button>
+          </ Card>
       )})}
     </Stack>
-  )
+  );
 
 };
 

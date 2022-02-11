@@ -1,26 +1,73 @@
 import Card from '@mui/material/Card';
+import { Button } from '@mui/material';
 import IconButton  from '@mui/material/IconButton';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import InputClass from './InputClass';
+import 'firebase/compat/firestore';
+import  TextField  from "@mui/material/TextField";
+import  Autocomplete  from "@mui/material/Autocomplete";
+import firebase from '../../../utils/firebase';
+
 
 const Space = styled.div`
     padding: 15%
 `;
 
-
-
 const InputPoint = () =>{
-    const [point, setpoint] = useState('');
-   
+  const [classnames, setClassnames] = useState([]);
+  const [name, setName] = useState("");
+  const [point, setpoint] = useState('');
+    useEffect(()=>{
+      firebase.firestore()
+      .collection("class")
+      //.orderBy("point", 'desc')
+      /*.onSnapshot((collectionSnapshot)=>{
+        const data = collectionSnapshot.docs.map((docSnapshot) => {
+          const id = docSnapshot.id;
+          return {...docSnapshot.data(),id}
+        });
+        setClassnames(data);
+      });*/
+
+      .get()
+      .then((collectionSnapshot) => {
+        const data = collectionSnapshot.docs.map((docSnapshot) => {
+          const id = docSnapshot.id;
+          return {...docSnapshot.data(),id}
+        });
+        setClassnames(data);
+      
+      });
+
+    },[]);
+    
+    /*
+    function addGoodPoint (){
+      firebase
+        .firestore()
+        .collection("class")
+        .doc(classname.id)
+        .update({"ban": false}
+      )
+    }
+    */
     return(
     <Space>
         <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}} >
         <h1>點數</h1>
             <form>
-            <InputClass />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={classnames.map((classname => classname.name))}
+              sx={{ width: 29/30}}
+              inputValue={name}
+              onInputChange={(event, newInputValue) => {
+                  setName(newInputValue);}}
+              renderInput={(params) => <TextField  {...params} label="class" />}
+            />
             <IconButton 
                 aria-label="ThumbUpAlt" 
                 onClick={() => setpoint("good")}
@@ -41,26 +88,16 @@ const InputPoint = () =>{
             </IconButton>
             <div style={{padding: '10px'}}></div>
             <br></br>
-            <input 
+            <Button
             type="submit"
-            value="✅ record"
-            style={{ 
+            onClick={() => alert( name +  point)}
+            sx={{ 
                 fontSize: '25px',
                 color:'#ffffff',
-                backgroundColor: '#005b9f',
-                paddingTop: '10px',
-                paddingRight: '16px',
-                paddingLeft: '16px',
-                paddingBottom: '10px',
-                borderRadius: '8px',
-                border:'0'}}></input>
+                bgcolor: '#005b9f',
+                border:'0'}}>✅上傳</Button>
             </form>
         </Card>
-        <Card sx={{p: 5}}></Card>
-        <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}} >
-
-        </Card>
-
     </Space>
     
     );

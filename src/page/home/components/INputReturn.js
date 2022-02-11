@@ -3,9 +3,10 @@ import Input from '@mui/material/Input';
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import 'firebase/compat/firestore';
+import "firebase/compat/firestore";
 import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
+import Button from '@mui/material/Button';
 import firebase from '../../../utils/firebase';
 
 const Text = styled.h2`
@@ -16,66 +17,26 @@ const Space = styled.div`
     padding: 15%
 `;
 
-const OptionEffect = (props) => {
-    const ball = props.ball;
-    if(ball === 'volleyball'){
-        return(<>
-        <form>
-            <InputClass />
-            <Text>球數</Text>
-            <Input type="Bigint" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}/>
-        </form>
-        
-        </>);
-    }
-    return(
-    <>
-        <form style={{overflow: 'hidden'}}>
-            <InputClass />
-            <Text>球數</Text>
-            <Input type="Bigint" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}/>
-            <Text>拍數</Text>
-            <Input type="Bigint" minRows={2} label="球數" defaultValue= "2" inputProps={{ 'aria-label': 'description' }} required = {true}/>
-        </form>
-    </>);
-};
-
-const InputClass = () =>{
-    const [classnames, setClassnames] = useState([]);
-    const [name, setName] = useState("");
-    
-    useEffect(()=>{
-      firebase.firestore().
-      collection("class")
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map(doc => {
-          return doc.data();
-        });
-        setClassnames(data);
-      
-      });
-    },[]);
-  
-    return(
-      <>
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={classnames.map((classnmaes => classnmaes.name))}
-        sx={{ width: 9/10}}
-        inputValue={name}
-        onInputChange={(event, newInputValue) => {
-            setName(newInputValue);}}
-  
-        renderInput={(params) => <TextField  {...params} label="class" />}
-      />
-      </>   
-    )
-  };
 
 const InputLend = () => {
     const [ball, setBall] = useState("volleyball");
+    const [classnames, setClassnames] = useState([]);
+    const [name, setName] = useState("");
+
+    useEffect(()=>{
+        firebase.firestore()
+        .collection("class")
+        .where("ban", "==", false)
+        .get()
+        .then((collectionSnapshot) => {
+          const data = collectionSnapshot.docs.map(doc => {
+            return doc.data();
+          });
+          setClassnames(data);
+        
+        });
+      },[]);
+
     const handleChange = (event, newBall) => {
         setBall(newBall);
     };
@@ -96,7 +57,47 @@ const InputLend = () => {
                 <ToggleButton value="tabletennis">桌球</ToggleButton>
                 <ToggleButton value="badminton">羽球</ToggleButton>
             </ToggleButtonGroup>
-            <OptionEffect ball={ball}/>
+
+            <form style={{overflow: 'hidden'}}>
+
+            <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={classnames.map((classnmaes => classnmaes.name))}
+                sx={{ width: 29/30}}
+                inputValue={name}
+                onInputChange={(event, newInputValue) => {
+                    setName(newInputValue);}}
+        
+                renderInput={(params) => <TextField  {...params} label="class" />}
+            />
+
+            <Text>球數</Text>
+            <Input type="Bigint" 
+            minRows={1} label="球數" 
+            defaultValue= "1" 
+            inputProps={{ 'aria-label': 'description' }} 
+            required = {true}/>
+
+            <Text sx={{visibility:`${ball === "volleyball" ? 'hidden' : ' '}`}} >拍數</Text>
+            <Input 
+            placeholder='拍數'
+            sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`}}
+            type="Bigint" minRows={2} 
+            label="球數" defaultValue= "2" 
+            inputProps={{ 'aria-label': 'description' }} 
+            required = {true}
+            />
+            <div style={{padding: '10px'}}></div>
+            <Button
+                type="submit"   
+                onClick={() => alert( name +  ball)}
+                sx={{ 
+                    fontSize: '25px',
+                    color:'#ffffff',
+                    bgcolor: '#005b9f',
+                    border:'0'}}>✅上傳</Button>
+        </form>
         </>
         </Card>
         </Space>
