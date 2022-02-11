@@ -39,10 +39,7 @@ const ClassDashBoard = () => {
               <h2>{classname.name}</h2>
               <ListItem sx={{alignItems: 'center'}}>
                 <ListItemIcon><ThumbUpAltIcon ></ThumbUpAltIcon></ListItemIcon>
-                <ListItemText>{classname.good}</ListItemText>
-              
-                <ListItemIcon><ThumbDownAltIcon ></ThumbDownAltIcon></ListItemIcon>
-                <ListItemText>{classname.bad}</ListItemText>
+                <ListItemText>{classname.point}</ListItemText>
               </ListItem>
 
               <ListItem>

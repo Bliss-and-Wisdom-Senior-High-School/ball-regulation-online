@@ -7,6 +7,8 @@ import firebase from '../../../utils/firebase';
 
 const InputClass = () =>{
   const [classnames, setClassnames] = useState([]);
+  const [name, setName] = useState("");
+  
   useEffect(()=>{
     firebase.firestore().
     collection("class")
@@ -21,13 +23,21 @@ const InputClass = () =>{
   },[]);
 
   return(
+    <>
     <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={classnames.map((classnmaes => classnmaes.name))}
       sx={{ width: 9/10}}
+      inputValue={name}
+      onInputChange={(event, newInputValue) => {
+          setName(newInputValue);}}
+
       renderInput={(params) => <TextField  {...params} label="class" />}
     />
+    </>
+    
+    
   )
 };
 

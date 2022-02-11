@@ -5,9 +5,11 @@
         "firestore",
         "getdata",
         "iconstyle",
+        "labelledby",
         "setbad",
         "setgood",
         "setpoint",
-        "tabletennis"
+        "tabletennis",
+        "tofirebase"
     ]
 }
