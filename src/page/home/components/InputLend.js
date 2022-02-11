@@ -43,7 +43,7 @@ const InputLend = () => {
 
     return(
         <Space>
-            <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}}>
+            <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: 5, bgcolor: '#48a999'}}>
             <h1>借</h1>
             <>
             <ToggleButtonGroup

@@ -19,29 +19,19 @@ const InputPoint = () =>{
   const [classnames, setClassnames] = useState([]);
   const [name, setName] = useState("");
   const [point, setpoint] = useState('');
-    useEffect(()=>{
-      firebase.firestore()
-      .collection("class")
-      //.orderBy("point", 'desc')
-      /*.onSnapshot((collectionSnapshot)=>{
-        const data = collectionSnapshot.docs.map((docSnapshot) => {
-          const id = docSnapshot.id;
-          return {...docSnapshot.data(),id}
-        });
-        setClassnames(data);
-      });*/
-
-      .get()
-      .then((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map((docSnapshot) => {
-          const id = docSnapshot.id;
-          return {...docSnapshot.data(),id}
-        });
-        setClassnames(data);
-      
+  useEffect(()=>{
+    firebase.firestore()
+    .collection("class")
+    .where("ban", "==", false)
+    .get()
+    .then((collectionSnapshot) => {
+      const data = collectionSnapshot.docs.map(doc => {
+        return doc.data();
       });
-
-    },[]);
+      setClassnames(data);
+    
+    });
+  },[]);
     
     /*
     function addGoodPoint (){
@@ -55,7 +45,7 @@ const InputPoint = () =>{
     */
     return(
     <Space>
-        <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: '30%', bgcolor: '#48a999'}} >
+        <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: 10, bgcolor: '#48a999'}} >
         <h1>點數</h1>
             <form>
             <Autocomplete
