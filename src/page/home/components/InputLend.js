@@ -22,6 +22,7 @@ const InputLend = () => {
     const [ball, setBall] = useState("volleyball");
     const [classnames, setClassnames] = useState([]);
     const [name, setName] = useState("");
+    const [id, setId] = useState({id: "",point: 0});
 
     useEffect(()=>{
         firebase.firestore()
@@ -29,13 +30,14 @@ const InputLend = () => {
         .where("ban", "==", false)
         .get()
         .then((collectionSnapshot) => {
-          const data = collectionSnapshot.docs.map(doc => {
-            return doc.data();
+          const data = collectionSnapshot.docs.map((docSnapshot) => {
+            const id = docSnapshot.id;
+            return {...docSnapshot.data(),id}
           });
           setClassnames(data);
         
         });
-      },[]);
+      }, []);
 
     const handleChange = (event, newBall) => {
         setBall(newBall);
@@ -61,16 +63,20 @@ const InputLend = () => {
             <form style={{overflow: 'hidden'}}>
 
             <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={classnames.map((classnmaes => classnmaes.name))}
-                sx={{ width: 29/30}}
-                inputValue={name}
-                onInputChange={(event, newInputValue) => {
-                    setName(newInputValue);}}
-        
-                renderInput={(params) => <TextField  {...params} label="class" />}
-            />
+              disablePortal
+              id="combo-box-demo"
+              options={classnames}
+              getOptionLabel={option => option.name}
+              sx={{ width: 29/30}}
+              inputValue={name}
+              onInputChange={(event, newInputValue) => {
+                  setName(newInputValue);
+                }}
+                onChange={(event, newValue) => {
+                  setId({id: newValue.id, point: newValue.point});
+                }}  
+              renderInput={(params) => <TextField  {...params} label="class" />}
+            />     
 
             <Text>球數</Text>
             <Input type="Bigint" 

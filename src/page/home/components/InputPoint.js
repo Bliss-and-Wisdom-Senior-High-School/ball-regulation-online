@@ -18,31 +18,38 @@ const Space = styled.div`
 const InputPoint = () =>{
   const [classnames, setClassnames] = useState([]);
   const [name, setName] = useState("");
-  const [point, setpoint] = useState('');
+  const [point, setpoint] = useState(0);
+  const [id, setId] = useState({id: "",point: 0});
   useEffect(()=>{
     firebase.firestore()
     .collection("class")
     .where("ban", "==", false)
     .get()
     .then((collectionSnapshot) => {
-      const data = collectionSnapshot.docs.map(doc => {
-        return doc.data();
+      const data = collectionSnapshot.docs.map((docSnapshot) => {
+        const id = docSnapshot.id;
+        return {...docSnapshot.data(),id}
       });
       setClassnames(data);
     
     });
-  },[]);
+  }, []);
     
-    /*
+    
     function addGoodPoint (){
+      
       firebase
         .firestore()
         .collection("class")
-        .doc(classname.id)
-        .update({"ban": false}
+        .doc(id.id)
+        .update({
+          "point": point
+        }
       )
+
+     alert(id.id + (point))
     }
-    */
+
     return(
     <Space>
         <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: 10, bgcolor: '#48a999'}} >
@@ -51,36 +58,41 @@ const InputPoint = () =>{
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={classnames.map((classname => classname.name))}
+              options={classnames}
+              getOptionLabel={option => option.name}
               sx={{ width: 29/30}}
               inputValue={name}
               onInputChange={(event, newInputValue) => {
-                  setName(newInputValue);}}
+                  setName(newInputValue);
+                }}
+                onChange={(event, newValue) => {
+                  setId({id: newValue.id, point: newValue.point});
+                }}  
               renderInput={(params) => <TextField  {...params} label="class" />}
-            />
+            />     
             <IconButton 
                 aria-label="ThumbUpAlt" 
-                onClick={() => setpoint("good")}
+                onClick={() => setpoint(1)}
                 ><ThumbUpAltIcon
                     fontSize="large"
                     style={{
-                        color: `${point === "good" ? '#ff7043' : '#546e7a'}`,
+                        color: `${point === 1 ? '#ff7043' : '#546e7a'}`,
                 }}/>
             </IconButton>
             <IconButton 
                 aria-label="ThumbDownAlt" 
-                onClick = {() => setpoint("bad")}
+                onClick = {() => setpoint(-1)}
                 ><ThumbDownAltIcon 
                     fontSize="large"
                     style={{
-                        color: `${point === "bad" ? '#ff7043' : '#546e7a'}`
+                        color: `${point === -1 ? '#ff7043' : '#546e7a'}`
                 }}/>
             </IconButton>
             <div style={{padding: '10px'}}></div>
             <br></br>
             <Button
             type="submit"
-            onClick={() => alert( name +  point)}
+            onClick={addGoodPoint}
             sx={{ 
                 fontSize: '25px',
                 color:'#ffffff',
