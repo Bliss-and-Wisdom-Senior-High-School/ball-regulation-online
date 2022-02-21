@@ -23,7 +23,6 @@ const InputPoint = () =>{
   useEffect(()=>{
     firebase.firestore()
     .collection("class")
-    .where("ban", "==", false)
     .get()
     .then((collectionSnapshot) => {
       const data = collectionSnapshot.docs.map((docSnapshot) => {
@@ -43,11 +42,11 @@ const InputPoint = () =>{
         .collection("class")
         .doc(id.id)
         .update({
-          "point": point
+          "point": 1
         }
       )
 
-     alert(id.id + (point))
+     alert(id.id)
     }
 
     return(
