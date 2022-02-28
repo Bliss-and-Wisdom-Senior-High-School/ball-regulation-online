@@ -42,7 +42,7 @@ const InputPoint = () =>{
         .collection("class")
         .doc(id.id)
         .update({
-          "point": 1
+          "point": firebase.firestore.FieldValue.increment(id.point)
         }
       )
 

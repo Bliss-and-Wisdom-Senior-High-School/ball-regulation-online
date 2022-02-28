@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import Input from '@mui/material/Input';
-
+import TextField from '@mui/material/TextField';
 import styled from "@emotion/styled";
 
 import InputClass from "./InputClass";
@@ -22,7 +22,7 @@ const OptionEffect = (props) => {
         <form>
             <InputClass />
             <Text>球數</Text>
-            <Input type="Bigint" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}/>
+            <TextField type="number" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}></TextField>
         </form>
         
         </>);
@@ -32,9 +32,9 @@ const OptionEffect = (props) => {
         <form style={{overflow: 'hidden'}}>
             <InputClass />
             <Text>球數</Text>
-            <Input type="Bigint" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}/>
+            <TextField type="number" minRows={1} label="球數" defaultValue= "1" inputProps={{ 'aria-label': 'description' }} required = {true}></TextField>
             <Text>拍數</Text>
-            <Input type="Bigint" minRows={2} label="球數" defaultValue= "2" inputProps={{ 'aria-label': 'description' }} required = {true}/>
+            <TextField type="number" minRows={2} label="球數" defaultValue= "2" inputProps={{ 'aria-label': 'description' }} required = {true}></TextField>
         </form>
     </>);
 };

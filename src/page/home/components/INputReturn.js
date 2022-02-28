@@ -47,7 +47,7 @@ const InputLend = () => {
     return(
         <Space>
             <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: 5, bgcolor: '#48a999'}}>
-            <h1>借</h1>
+            <h1>還</h1>
             <>
             <ToggleButtonGroup
                 color="primary"
@@ -77,24 +77,28 @@ const InputLend = () => {
                   setId({id: newValue.id, point: newValue.point});
                 }}  
               renderInput={(params) => <TextField  {...params} label="class" />}
-            />     
-
-            <Text>球數</Text>
-            <Input type="Bigint" 
-            minRows={1} label="球數" 
-            defaultValue= "1" 
-            inputProps={{ 'aria-label': 'description' }} 
-            required = {true}/>
-
-            <Text sx={{visibility:`${ball === "volleyball" ? 'hidden' : ' '}`}} >拍數</Text>
-            <Input 
-            placeholder='拍數'
-            sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`}}
-            type="Bigint" minRows={2} 
-            label="球數" defaultValue= "2" 
-            inputProps={{ 'aria-label': 'description' }} 
-            required = {true}
-            />
+            />    
+            <TextField 
+              margin="normal"
+              sx={{pt:'15px'}}
+              type="number" 
+              variant="outlined"
+              label="拍數" 
+              defaultValue= "1" 
+              inputProps={{ 'aria-label': 'description'}} 
+              required = {true}
+            ></TextField>
+    
+            <TextField 
+              margin="normal"
+              variant="outlined"
+              sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`, p: '10px'}}
+              type="number" 
+              label="球數" 
+              defaultValue= "1" 
+              inputProps={{ 'aria-label': 'description'}} 
+              required = {true}
+            ></TextField>
             <div style={{padding: '10px'}}></div>
             <Button
                 type="submit"   

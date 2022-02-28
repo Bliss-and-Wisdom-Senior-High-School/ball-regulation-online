@@ -2,7 +2,8 @@ import React from 'react'
 import { useState, useEffect, Fragment } from 'react';
 import 'firebase/compat/firestore';
 import firebase from '../../utils/firebase';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import BlockIcon from '@mui/icons-material/Block';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
@@ -11,10 +12,12 @@ import ListItemText from '@mui/material/ListItemText';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
-
+import TextField from '@mui/material/TextField';
 
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
+  const [newname,SetNemname] = useState("");
+  
   useEffect(()=>{
     firebase.firestore()
     .collection("class")
@@ -68,6 +71,13 @@ const ClassDashBoard = () => {
           } 
         }
           
+        function toggledelete (){
+            firebase
+            .firestore()
+            .collection("class")
+            .doc(classname.id)
+            .delete()
+        }
 
         return(
           <Card key={classname.id} sx={{pl: '8%',pr: '8%',pt: 1,pb: 3, bgcolor:  color1 }} >
@@ -93,7 +103,7 @@ const ClassDashBoard = () => {
                   </ListItemText>
               </ListItem>
 
-              <ListItem sx={{pt: 1, pb: 1}}>
+              <ListItem >
                   <ListItemText><h3>桌球</h3></ListItemText>
                   <ListItemText>
                     <List>
@@ -102,13 +112,30 @@ const ClassDashBoard = () => {
                     </List>
                   </ListItemText>
               </ListItem>
+              <ListItem>
+                <ListItemText>
+                  <Button 
+                sx = {{alignItems: 'left', bgcolor: '#ce93d8'}}
+                onClick={togglebaned}
+                >
+                  <BlockIcon></BlockIcon>
+                </Button>
+                </ListItemText>
+                <ListItemText>
+                  <Button 
+                sx = {{alignItems: 'left', bgcolor: '#d32f2f'}}
+                onClick={toggledelete}
+                ><DeleteIcon></ DeleteIcon></Button></ListItemText>
+            </ListItem>
             </List>
-            <Button 
-            sx = {{alignItems: 'left', bgcolor: '#ce93d8'}}
-            onClick={togglebaned}
-            >🚫</Button>
           </ Card>
       )})}
+      <Card sx={{alignContent: 'center', bgcolor: '#ff7043', p:'10px'}}>
+        <TextField  variant="outlined" label="classname" type="text"></TextField>
+        <br></br>
+        <Button sx ={{ bgcolor: '#ffa270'}}>add</Button>
+      </Card>
+      <Card></Card>
     </Stack>
   );
 

@@ -1,10 +1,10 @@
 import Card from '@mui/material/Card';
 import Input from '@mui/material/Input';
+import TextField from "@mui/material/TextField";
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import "firebase/compat/firestore";
-import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
 import Button from '@mui/material/Button';
@@ -76,23 +76,30 @@ const InputLend = () => {
                   setId({id: newValue.id, point: newValue.point});
                 }}  
               renderInput={(params) => <TextField  {...params} label="class" />}
-            />     
+            />  
 
-            <Text>球數</Text>
-            <Input type="Bigint" 
-            minRows={1} label="球數" 
-            defaultValue= "1" 
-            inputProps={{ 'aria-label': 'description' }} 
-            required = {true}/>
 
-            <Text sx={{display:`${ball === "volleyball" ? 'none' : ' '}`}} >拍數</Text>
-            <Input 
-            sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`}}
-            type="Bigint" minRows={2} 
-            label="球數" defaultValue= "2" 
-            inputProps={{ 'aria-label': 'description' }} 
-            required = {true}
-            />
+            <TextField 
+              margin="normal"
+              sx={{pt:'15px'}}
+              type="number" 
+              variant="outlined"
+              label="拍數" 
+              defaultValue= "1" 
+              inputProps={{ 'aria-label': 'description'}} 
+              required = {true}
+            ></TextField>
+
+            <TextField 
+              margin="normal"
+              variant="outlined"
+              sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`, p: '10px'}}
+              type="number" 
+              label="球數" 
+              defaultValue= "1" 
+              inputProps={{ 'aria-label': 'description'}} 
+              required = {true}
+            ></TextField>
             <div style={{padding: '10px'}}></div>
             <Button
             type="submit"
