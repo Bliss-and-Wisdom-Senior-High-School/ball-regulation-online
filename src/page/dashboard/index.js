@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField';
 
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
-  const [newname,SetNemname] = useState("");
+  const [newname,SetNewname] = useState("");
   
   useEffect(()=>{
     firebase.firestore()
@@ -29,7 +29,10 @@ const ClassDashBoard = () => {
       });
       setClassnames(data);
     });
-  
+    
+    const handleChange = (event, newname) => {
+      SetNewname(newname);
+  };
 
 
     /*
@@ -78,7 +81,7 @@ const ClassDashBoard = () => {
             .doc(classname.id)
             .delete()
         }
-
+        
         return(
           <Card key={classname.id} sx={{pl: '8%',pr: '8%',pt: 1,pb: 3, bgcolor:  color1 }} >
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: color1 ,textAlign: 'left'} }>
@@ -131,11 +134,49 @@ const ClassDashBoard = () => {
           </ Card>
       )})}
       <Card sx={{alignContent: 'center', bgcolor: '#ff7043', p:'10px'}}>
-        <TextField  variant="outlined" label="classname" type="text"></TextField>
+        <form>
+        <TextField  
+          variant="outlined"
+          label="classname"
+          type="text"
+          margin="normal"
+          onChange={
+            (e) => {
+              SetNewname(e.target.value);
+            }
+          }
+          ></TextField>
+          <p>{newname}</p>
         <br></br>
-        <Button sx ={{ bgcolor: '#ffa270'}}>add</Button>
+        <Button 
+          sx ={{ bgcolor: '#ffa270'}}
+          type="submit"
+          onClick={
+            firebase
+            .firestore()
+            .collection("class")
+            .doc()
+            .set({
+              "name": newname,
+              "point": 0,
+              "ban" :false,
+              "volleyball": {
+                "ball" :0
+              },
+              "tabletennis": {
+                "ball": 0,
+                "racket": 0
+              },
+              "badminton": {
+                "ball": 0,
+                "racket": 0
+              }
+            }
+            )
+          }
+          >add</Button>
+        </form>
       </Card>
-      <Card></Card>
     </Stack>
   );
 

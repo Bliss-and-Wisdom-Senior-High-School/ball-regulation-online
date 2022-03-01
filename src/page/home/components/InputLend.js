@@ -16,13 +16,15 @@ const Text = styled.h2`
 const Space = styled.div`
     padding: 15%
 `;
-
+const min = 0;
 
 const InputLend = () => {
     const [ball, setBall] = useState("volleyball");
     const [classnames, setClassnames] = useState([]);
     const [name, setName] = useState("");
     const [id, setId] = useState({id: "",point: 0});
+    const [ballnum, setBallnum] = useState("");
+    const [racket, setRacket] = useState("")
 
     useEffect(()=>{
         firebase.firestore()
@@ -48,6 +50,7 @@ const InputLend = () => {
             <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: 5, bgcolor: '#48a999'}}>
             <h1>借</h1>
             <>
+            <form style={{overflow: 'hidden'}}>
             <ToggleButtonGroup
                 color="primary"
                 value={ball}
@@ -59,8 +62,6 @@ const InputLend = () => {
                 <ToggleButton value="tabletennis">桌球</ToggleButton>
                 <ToggleButton value="badminton">羽球</ToggleButton>
             </ToggleButtonGroup>
-
-            <form style={{overflow: 'hidden'}}>
 
             <Autocomplete
               disablePortal
@@ -81,29 +82,45 @@ const InputLend = () => {
 
             <TextField 
               margin="normal"
-              sx={{pt:'15px'}}
+              InputProps={{min}}
               type="number" 
               variant="outlined"
-              label="拍數" 
+              label="球數" 
               defaultValue= "1" 
               inputProps={{ 'aria-label': 'description'}} 
+              onChange={
+                (e) => {
+                  setBallnum(e.target.value);
+                  if(ballnum < 0){
+                    setBallnum(0);
+                  }
+                }
+              }
               required = {true}
             ></TextField>
 
             <TextField 
               margin="normal"
               variant="outlined"
-              sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`, p: '10px'}}
+              sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`}}
               type="number" 
-              label="球數" 
+              label="拍數" 
               defaultValue= "1" 
               inputProps={{ 'aria-label': 'description'}} 
               required = {true}
+              onChange={
+                (e) => {
+                    setRacket(e.target.value);
+                    if (racket < 0){
+                      setRacket(0);
+                    }
+                }
+              }
             ></TextField>
-            <div style={{padding: '10px'}}></div>
+
             <Button
             type="submit"
-            onClick={() => alert( name +  ball)}
+            onClick={() => alert({ballnum},{racket} )}
             sx={{ 
                 fontSize: '25px',
                 color:'#ffffff',

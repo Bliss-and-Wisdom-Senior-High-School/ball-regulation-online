@@ -64,7 +64,7 @@ const InputPoint = () =>{
               onInputChange={(event, newInputValue) => {
                   setName(newInputValue);
                 }}
-                onChange={(event, newValue) => {
+              onChange={(event, newValue) => {
                   setId({id: newValue.id, point: newValue.point});
                 }}  
               renderInput={(params) => <TextField  {...params} label="class" />}
