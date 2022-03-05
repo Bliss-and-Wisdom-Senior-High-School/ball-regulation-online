@@ -23,8 +23,8 @@ const InputLend = () => {
     const [classnames, setClassnames] = useState([]);
     const [name, setName] = useState("");
     const [id, setId] = useState({id: "",point: 0});
-    const [ballnum, setBallnum] = useState("");
-    const [racket, setRacket] = useState("")
+    const [ballnum, setBallnum] = useState(0);
+    const [racket, setRacket] = useState(0);
 
     useEffect(()=>{
         firebase.firestore()
@@ -96,7 +96,7 @@ const InputLend = () => {
                   }
                 }
               }
-              required = {true}
+              required
             ></TextField>
 
             <TextField 
@@ -107,7 +107,7 @@ const InputLend = () => {
               label="拍數" 
               defaultValue= "1" 
               inputProps={{ 'aria-label': 'description'}} 
-              required = {true}
+              required
               onChange={
                 (e) => {
                     setRacket(e.target.value);

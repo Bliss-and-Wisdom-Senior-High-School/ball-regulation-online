@@ -145,6 +145,7 @@ const ClassDashBoard = () => {
               SetNewname(e.target.value);
             }
           }
+          requried
           ></TextField>
           <p>{newname}</p>
         <br></br>
