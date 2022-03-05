@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card';
-import Input from '@mui/material/Input';
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
@@ -8,7 +7,7 @@ import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import Button from '@mui/material/Button';
 import firebase from '../../../utils/firebase';
-import {Form} from "semantic-ui-react";
+
 const Text = styled.h2`
     text-align: left;
 `;
