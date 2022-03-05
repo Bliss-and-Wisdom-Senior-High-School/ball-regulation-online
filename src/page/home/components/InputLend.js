@@ -64,6 +64,7 @@ const InputLend = () => {
             </ToggleButtonGroup>
 
             <Autocomplete
+              required
               disablePortal
               id="combo-box-demo"
               options={classnames}
@@ -82,12 +83,11 @@ const InputLend = () => {
 
             <TextField 
               margin="normal"
-              InputProps={{min}}
               type="number" 
               variant="outlined"
               label="球數" 
               defaultValue= "1" 
-              inputProps={{ 'aria-label': 'description'}} 
+              inputProps={{ 'aria-label': 'description', min}} 
               onChange={
                 (e) => {
                   setBallnum(e.target.value);
@@ -106,7 +106,7 @@ const InputLend = () => {
               type="number" 
               label="拍數" 
               defaultValue= "1" 
-              inputProps={{ 'aria-label': 'description'}} 
+              inputProps={{ 'aria-label': 'description', min}} 
               required
               onChange={
                 (e) => {

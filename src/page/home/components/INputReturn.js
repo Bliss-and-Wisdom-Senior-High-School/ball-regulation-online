@@ -16,6 +16,7 @@ const Space = styled.div`
     padding: 15%
 `;
 
+const min = 0;
 
 const InputLend = () => {
     const [ball, setBall] = useState("volleyball");
@@ -84,8 +85,8 @@ const InputLend = () => {
               variant="outlined"
               label="拍數" 
               defaultValue= "1" 
-              inputProps={{ 'aria-label': 'description'}} 
-              required = {true}
+              inputProps={{ 'aria-label': 'description', min}} 
+              required
             ></TextField>
     
             <TextField 
@@ -95,8 +96,8 @@ const InputLend = () => {
               type="number" 
               label="球數" 
               defaultValue= "1" 
-              inputProps={{ 'aria-label': 'description'}} 
-              required = {true}
+              inputProps={{ 'aria-label': 'description', min}} 
+              required
             ></TextField>
             <div style={{padding: '10px'}}></div>
             <Button

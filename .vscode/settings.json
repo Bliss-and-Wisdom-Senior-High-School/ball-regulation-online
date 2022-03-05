@@ -13,6 +13,7 @@
         "tabletennis",
         "tofirebase",
         "togglebaned",
-        "toggledelete"
+        "toggledelete",
+        "updatedata"
     ]
 }
