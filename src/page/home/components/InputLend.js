@@ -45,6 +45,36 @@ const InputLend = () => {
         setBall(newBall);
     };
 
+    const lendball = () =>{
+      if (ball === "volleyball"){
+        firebase
+          .firestore
+          .collection("class")
+          .doc(id.id)
+          .update(
+            {}
+          )
+      }
+      else if( ball === "tabletennis"){
+        firebase
+          .firestore
+          .collection("class")
+          .doc(id.id)
+          .update(
+            {}
+          )
+      }
+      else if( ball === "badminton"){
+        firebase
+          .firestore
+          .collection("class")
+          .doc(id.id)
+          .update(
+            {}
+          )
+      }
+    }
+
     return(
         <Space>
             <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: 5, bgcolor: '#48a999'}}>

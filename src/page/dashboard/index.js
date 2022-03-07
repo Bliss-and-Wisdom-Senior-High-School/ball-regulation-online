@@ -153,6 +153,8 @@ const ClassDashBoard = () => {
           sx ={{ bgcolor: '#ffa270'}}
           type="submit"
           onClick={
+            console.log("updata")
+            /* 
             firebase
             .firestore()
             .collection("class")
@@ -174,6 +176,7 @@ const ClassDashBoard = () => {
               }
             }
             )
+            */
           }
           >add</Button>
         </form>

@@ -42,11 +42,9 @@ const InputPoint = () =>{
         .collection("class")
         .doc(id.id)
         .update({
-          "point": firebase.firestore.FieldValue.increment(id.point)
+          "point": firebase.firestore.FieldValue.increment(point)
         }
       )
-
-     alert(id.id)
     }
 
     return(
@@ -67,7 +65,11 @@ const InputPoint = () =>{
               onChange={(event, newValue) => {
                   setId({id: newValue.id, point: newValue.point});
                 }}  
-              renderInput={(params) => <TextField  {...params} label="class" />}
+              renderInput={(params) => 
+                <TextField  
+                {...params} 
+                label="class"
+                required />}
             />     
             <IconButton 
                 aria-label="ThumbUpAlt" 
