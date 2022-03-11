@@ -13,6 +13,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
+import { Password } from '@mui/icons-material';
 
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
@@ -30,10 +31,6 @@ const ClassDashBoard = () => {
       setClassnames(data);
     });
     
-    const handleChange = (event, newname) => {
-      SetNewname(newname);
-  };
-
 
     /*
     .get()
@@ -48,6 +45,12 @@ const ClassDashBoard = () => {
     */
   },[]);
 
+  const handleChange = (event, newname) => {
+    if (newname === ""){
+      return;
+    }
+    SetNewname(newname);
+  };
 
   return(
     <Stack spacing={2} sx={{p:'14%'}}>
@@ -81,7 +84,6 @@ const ClassDashBoard = () => {
             .doc(classname.id)
             .delete()
         }
-        
         return(
           <Card key={classname.id} sx={{pl: '8%',pr: '8%',pt: 1,pb: 3, bgcolor:  color1 }} >
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: color1 ,textAlign: 'left'} }>
@@ -131,8 +133,10 @@ const ClassDashBoard = () => {
                 ><DeleteIcon></ DeleteIcon></Button></ListItemText>
             </ListItem>
             </List>
-          </ Card>
-      )})}
+        </ Card>)
+        }
+      )}
+     
       <Card sx={{alignContent: 'center', bgcolor: '#ff7043', p:'10px'}}>
         <form>
         <TextField  
@@ -140,12 +144,8 @@ const ClassDashBoard = () => {
           label="classname"
           type="text"
           margin="normal"
-          onChange={
-            (e) => {
-              SetNewname(e.target.value);
-            }
-          }
-          requried
+          onChange={handleChange}
+          required
           ></TextField>
           <p>{newname}</p>
         <br></br>

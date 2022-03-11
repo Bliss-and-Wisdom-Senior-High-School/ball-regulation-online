@@ -12,6 +12,8 @@
         "setpoint",
         "tabletennis",
         "tofirebase",
-        "togglebaned"
+        "togglebaned",
+        "toggledelete",
+        "updatedata"
     ]
 }
