@@ -127,10 +127,11 @@ const ClassDashBoard = () => {
                 </Button>
                 </ListItemText>
                 <ListItemText>
-                  <Button 
+                <Button 
                 sx = {{alignItems: 'left', bgcolor: '#d32f2f'}}
                 onClick={toggledelete}
-                ><DeleteIcon></ DeleteIcon></Button></ListItemText>
+                ><DeleteIcon></ DeleteIcon></Button>
+                </ListItemText>
             </ListItem>
             </List>
         </ Card>)

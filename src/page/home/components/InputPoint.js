@@ -36,7 +36,7 @@ const InputPoint = () =>{
     
     
     function addGoodPoint (){
-      
+      console.log(`${id.id} ${point}`)
       firebase
         .firestore()
         .collection("class")

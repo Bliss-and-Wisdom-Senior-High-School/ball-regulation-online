@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card';
-import Input from '@mui/material/Input';
 import TextField from "@mui/material/TextField";
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from "react";
@@ -9,9 +8,6 @@ import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
 import Button from '@mui/material/Button';
 
-const Text = styled.h2`
-    text-align: left;
-`;
 
 const Space = styled.div`
     padding: 15%
@@ -46,13 +42,18 @@ const InputLend = () => {
     };
 
     const lendball = () =>{
+      console.log(`${id.id} ${ball} ${ballnum}  ${racket}`)
+      
       if (ball === "volleyball"){
         firebase
           .firestore
           .collection("class")
           .doc(id.id)
           .update(
-            {}
+            {"volleyball":{
+                "ball": firebase.firestore.FieldValue.increment(ballnum)
+              }
+            }
           )
       }
       else if( ball === "tabletennis"){
@@ -61,7 +62,12 @@ const InputLend = () => {
           .collection("class")
           .doc(id.id)
           .update(
-            {}
+            {"tabletennis":
+              {
+                "ball" :firebase.firestore.FieldValue.increment(ballnum),
+                "racket": firebase.firestore.FieldValue.increment(racket)
+              }
+            }
           )
       }
       else if( ball === "badminton"){
@@ -70,7 +76,13 @@ const InputLend = () => {
           .collection("class")
           .doc(id.id)
           .update(
-            {}
+            {
+              "badminton": 
+              {
+                "ball": firebase.firestore.FieldValue.increment(ballnum),
+                "racket" : firebase.firestore.FieldValue.increment(racket)
+              }
+            }
           )
       }
     }
@@ -107,7 +119,10 @@ const InputLend = () => {
                 onChange={(event, newValue) => {
                   setId({id: newValue.id, point: newValue.point});
                 }}  
-              renderInput={(params) => <TextField  {...params} label="class" />}
+              renderInput={(params) => <TextField  
+                {...params} 
+                label="class"
+                required />}
             />  
 
 
@@ -121,9 +136,6 @@ const InputLend = () => {
               onChange={
                 (e) => {
                   setBallnum(e.target.value);
-                  if(ballnum < 0){
-                    setBallnum(0);
-                  }
                 }
               }
               required
@@ -141,16 +153,13 @@ const InputLend = () => {
               onChange={
                 (e) => {
                     setRacket(e.target.value);
-                    if (racket < 0){
-                      setRacket(0);
-                    }
                 }
               }
             ></TextField>
 
             <Button
             type="submit"
-            onClick={() => alert({ballnum},{racket} )}
+            onClick={lendball}
             sx={{ 
                 fontSize: '25px',
                 color:'#ffffff',
