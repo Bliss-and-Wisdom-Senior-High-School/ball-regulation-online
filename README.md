@@ -1,8 +1,9 @@
-<h1 style ={{align-context: center}}>ball app</h1>
+<h1 style ={{align-text: center}}>Ball-Regulation</h1>
 
 
+## About Project
 
-
+## Project
 ```
 src -|
      |-component
@@ -21,3 +22,7 @@ src -|
             |-dashboard-index-
                        |-components
 ```
+## Tech Stack
+
+## Future Plan
+<p style ={{align-context: center}}>Made with love by Bo-chain</p>

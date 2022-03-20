@@ -1,9 +1,16 @@
 import Option from'./components/option';
+import Typography from '@mui/material/Typography';
 
 const Home = () => {
   return(
   <>
-    <h1>Home</h1>
+    <Typography
+      sx={{
+        FontSize: '80px',
+        p: '10px'
+      }}
+      fontSize="xx-large"
+    >Home</Typography>
       <Option />
   </>
   );

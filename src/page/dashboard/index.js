@@ -13,7 +13,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
-import { Password } from '@mui/icons-material';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
@@ -89,8 +89,12 @@ const ClassDashBoard = () => {
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: color1 ,textAlign: 'left'} }>
               <h2>{classname.name}</h2>
               <ListItem sx={{alignItems: 'center'}}>
-                <ListItemIcon><ThumbUpAltIcon ></ThumbUpAltIcon></ListItemIcon>
-                <ListItemText>{classname.point}</ListItemText>
+                  <List>
+                    <ListItem><ListItemIcon><ThumbUpAltIcon ></ThumbUpAltIcon></ListItemIcon> <ListItemText>{classname.point.good}</ListItemText></ListItem>
+                    <ListItem><ListItemIcon><ThumbDownAltIcon ></ThumbDownAltIcon></ListItemIcon> <ListItemText>{classname.point.good}</ListItemText></ListItem>
+                  </List>
+                
+               
               </ListItem>
 
               <ListItem sx={{pt: 1, pb: 1}}>

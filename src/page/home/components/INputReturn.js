@@ -80,7 +80,6 @@ const InputLend = () => {
             />    
             <TextField 
               margin="normal"
-              sx={{pt:'15px'}}
               type="number" 
               variant="outlined"
               label="拍數" 
@@ -92,7 +91,7 @@ const InputLend = () => {
             <TextField 
               margin="normal"
               variant="outlined"
-              sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`, p: '10px'}}
+              sx={{visibility:`${ball === "volleyball" ? 'hidden': ' '}`}}
               type="number" 
               label="球數" 
               defaultValue= "1" 

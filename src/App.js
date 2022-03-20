@@ -5,7 +5,7 @@ import DashBoard from"./page/dashboard";
 import styled from "@emotion/styled";
 import HomeIcon from '@mui/icons-material/Home';
 import StorageIcon from '@mui/icons-material/Storage';
-
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 const Title = styled.div`
   text-align: center;
 `;
@@ -22,13 +22,23 @@ const App = () => {
   return (
     <Title>
       <BrowserRouter style={{ display: 'flex', justifyContent: 'center'}}>
-        <NavLink to="/"><HomeIcon sx={iconstyle}  /></NavLink>            ball system                 <NavLink to="/dashboard"><StorageIcon sx={iconstyle} /></NavLink>
+        <Breadcrumbs
+          ria-label="breadcrumb" 
+          sx={{
+          alignItems: 'center',
+          display: 'inline-flex'
+        }}>
+          <NavLink to="/"><HomeIcon sx={iconstyle}  /></NavLink> 
+          
+          <NavLink to="/dashboard"><StorageIcon sx={iconstyle} /></NavLink>
+        </Breadcrumbs>
+                          
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/dashboard/*" element={<DashBoard />} />
-      </Routes>
-    </BrowserRouter>
-    </ Title>
+        </Routes>
+      </BrowserRouter>
+    </Title>
   );
 }
 export default App;
