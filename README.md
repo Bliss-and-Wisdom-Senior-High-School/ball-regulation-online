@@ -1,5 +1,8 @@
-<img align="center" width="100" height="100" src = "src/components/imgs/table-tennis.svg"></img>
+<div align="center">
+<img align="center" width="300" height="300" src = "src/components/imgs/table-tennis.svg"></img>
 <h1 align="center">Ball Regulation</h1>
+</div>
+
 
 ## About Project
 This a web app for Bliss & Wisdom high school to manage ball 
@@ -33,4 +36,4 @@ src
 
 ## Future Plan
 
-<h4 align="center">Made with love by Bo-Chain</h4>
+<h4 align="center">Made with ❤️ by Bo-Chain</h4>
