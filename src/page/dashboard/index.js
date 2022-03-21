@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect} from 'react';
 import 'firebase/compat/firestore';
 import firebase from '../../utils/firebase';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,9 +10,8 @@ import List from '@mui/material/List';
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
-import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 const ClassDashBoard = () => {
@@ -22,7 +21,6 @@ const ClassDashBoard = () => {
   useEffect(()=>{
     firebase.firestore()
     .collection("class")
-    //.orderBy("point", 'desc')
     .onSnapshot((collectionSnapshot)=>{
       const data = collectionSnapshot.docs.map((docSnapshot) => {
         const id = docSnapshot.id;
@@ -69,11 +67,11 @@ const ClassDashBoard = () => {
             .update({"ban": false}
             )
           }
-          else if(classname.ban === false) {
+          else if(classname.ban === false && classname.point.bad > 3) {
             firebase
             .firestore()
             .collection("class").doc(classname.id)
-            .update({"ban": true, "point": 0})
+            .update({"ban": true, "point": {good: classname.point.good + 1, bad: classname.point.bad - 3}})
           } 
         }
           
@@ -87,14 +85,11 @@ const ClassDashBoard = () => {
         return(
           <Card key={classname.id} sx={{pl: '8%',pr: '8%',pt: 1,pb: 3, bgcolor:  color1 }} >
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: color1 ,textAlign: 'left'} }>
-              <h2>{classname.name}</h2>
-              <ListItem sx={{alignItems: 'center'}}>
-                  <List>
-                    <ListItem><ListItemIcon><ThumbUpAltIcon ></ThumbUpAltIcon></ListItemIcon> <ListItemText>{classname.point.good}</ListItemText></ListItem>
-                    <ListItem><ListItemIcon><ThumbDownAltIcon ></ThumbDownAltIcon></ListItemIcon> <ListItemText>{classname.point.good}</ListItemText></ListItem>
-                  </List>
-                
-               
+        <Typography>{classname.name}</Typography>
+              
+              <ListItem>
+                <ListItemText><ThumbUpAltIcon ></ThumbUpAltIcon>{classname.point.good}</ListItemText>
+                <ListItemText><ThumbDownAltIcon ></ThumbDownAltIcon>{classname.point.bad}</ListItemText>
               </ListItem>
 
               <ListItem sx={{pt: 1, pb: 1}}>
@@ -142,50 +137,6 @@ const ClassDashBoard = () => {
         }
       )}
      
-      <Card sx={{alignContent: 'center', bgcolor: '#ff7043', p:'10px'}}>
-        <form>
-        <TextField  
-          variant="outlined"
-          label="classname"
-          type="text"
-          margin="normal"
-          onChange={handleChange}
-          required
-          ></TextField>
-          <p>{newname}</p>
-        <br></br>
-        <Button 
-          sx ={{ bgcolor: '#ffa270'}}
-          type="submit"
-          onClick={
-            console.log("updata")
-            /* 
-            firebase
-            .firestore()
-            .collection("class")
-            .doc()
-            .set({
-              "name": newname,
-              "point": 0,
-              "ban" :false,
-              "volleyball": {
-                "ball" :0
-              },
-              "tabletennis": {
-                "ball": 0,
-                "racket": 0
-              },
-              "badminton": {
-                "ball": 0,
-                "racket": 0
-              }
-            }
-            )
-            */
-          }
-          >add</Button>
-        </form>
-      </Card>
     </Stack>
   );
 
@@ -195,7 +146,13 @@ const ClassDashBoard = () => {
 const DashBoard = () => {
     return (
      <>
-      <h1>dashboard</h1>
+      <Typography
+      sx={{
+        FontSize: '80px',
+        p: '10px'
+      }}
+      fontSize="xx-large"
+      >DashBoard</Typography>
       <ClassDashBoard />
      </>
     );

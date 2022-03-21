@@ -5,7 +5,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import 'firebase/compat/firestore';
+import "firebase/compat/firestore";
 import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
@@ -19,12 +19,12 @@ const InputPoint = () =>{
   const [classnames, setClassnames] = useState([]);
   const [name, setName] = useState("");
   const [point, setpoint] = useState(0);
-  const [id, setId] = useState({id: "",point: 0});
+  const [id, setId] = useState({id: "",point: {}});
+
   useEffect(()=>{
     firebase.firestore()
     .collection("class")
-    .get()
-    .then((collectionSnapshot) => {
+    .onSnapshot((collectionSnapshot) => {
       const data = collectionSnapshot.docs.map((docSnapshot) => {
         const id = docSnapshot.id;
         return {...docSnapshot.data(),id}
@@ -35,16 +35,37 @@ const InputPoint = () =>{
   }, []);
     
     
-    function addGoodPoint (){
-      console.log(`${id.id} ${point}`)
+  function addGoodPoint (){
+      alert(`${id.id} ${point} ${id.point.good} ${id.point.bad}`);
+
+      if (point === 1){
+        firebase
+        .firestore()
+        .collection("class")
+        .doc(id.id)
+        .update(
+          {
+            point:
+            {
+              "good": firebase.firestore.FieldValue.increment(1) ,
+              "bad": id.point.bad
+            }
+          }
+        )
+      }else if(point === -1){
       firebase
         .firestore()
         .collection("class")
         .doc(id.id)
         .update({
-          "point": firebase.firestore.FieldValue.increment(point)
+          "point":
+          {
+            "good": id.point.good,
+            "bad": firebase.firestore.FieldValue.increment(1)
+          }
         }
       )
+      }
     }
 
     return(
