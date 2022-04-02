@@ -1,20 +1,21 @@
 {
-    "cSpell.words": [
-        "addclasstodb",
-        "banclass",
-        "bgcolor",
-        "classnmaes",
-        "firestore",
-        "getdata",
-        "iconstyle",
-        "labelledby",
-        "setbad",
-        "setgood",
-        "setpoint",
-        "tabletennis",
-        "tofirebase",
-        "togglebaned",
-        "toggledelete",
-        "updatedata"
-    ]
+  "cSpell.words": [
+    "addclasstodb",
+    "banclass",
+    "bgcolor",
+    "classnmaes",
+    "firestore",
+    "getdata",
+    "handlechange",
+    "iconstyle",
+    "labelledby",
+    "setbad",
+    "setgood",
+    "setpoint",
+    "tabletennis",
+    "tofirebase",
+    "togglebaned",
+    "toggledelete",
+    "updatedata"
+  ]
 }

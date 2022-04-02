@@ -5,8 +5,6 @@ import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
 */
 
-
-
 /*
 {classname.map(classname => {
       return(
@@ -21,7 +19,7 @@ import firebase from '../../../utils/firebase';
 
 
 */
-  /* class name in B&W
+/* class name in B&W
   const classname = [
     { name: '高三忠', year: 1994 },
     { name: '高三孝', year: 1972 },
