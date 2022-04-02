@@ -5,7 +5,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import "firebase/compat/firestore";
+import "firebase/firestore";
 import  TextField  from "@mui/material/TextField";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
@@ -61,7 +61,7 @@ const InputPoint = () =>{
           "point":
           {
             "good": id.point.good,
-            "bad": firebase.firestore.FieldValue.increment(1)
+            "bad": id.point.bad + 1
           }
         }
       )
@@ -70,9 +70,9 @@ const InputPoint = () =>{
 
     return(
     <Space>
-        <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: 10, bgcolor: '#48a999'}} >
+        <Card sx={{pl: '15%',pr: '15%',pt: '20px',pb: 10, bgcolor: '#fafafa'}} >
         <h1>點數</h1>
-            <form>
+            <form onSubmit={addGoodPoint}>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -113,7 +113,6 @@ const InputPoint = () =>{
             <div style={{padding: '10px'}}></div>
             <br></br>
             <Button
-            type="submit"
             onClick={addGoodPoint}
             sx={{ 
                 fontSize: '25px',

@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import "firebase/compat/firestore";
+import "firebase/firestore";
 import  Autocomplete  from "@mui/material/Autocomplete";
 import firebase from '../../../utils/firebase';
 import Button from '@mui/material/Button';
@@ -89,7 +89,7 @@ const InputLend = () => {
 
     return(
         <Space>
-            <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: 5, bgcolor: '#48a999'}}>
+            <Card sx = {{pl: '15%',pr: '15%',pt: '20px',pb: 5, bgcolor: '#fafafa'}}>
             <h1>借</h1>
             <>
             <form style={{overflow: 'hidden'}}>
@@ -111,7 +111,6 @@ const InputLend = () => {
               id="combo-box-demo"
               options={classnames}
               getOptionLabel={option => option.name}
-              sx={{ width: 29/30}}
               inputValue={name}
               onInputChange={(event, newInputValue) => {
                   setName(newInputValue);

@@ -1,7 +1,6 @@
 <div align="center">
 <img align="center" width="300" height="300" src = "src/components/imgs/table-tennis.svg"></img>
 <h1 align="center">Ball Regulation</h1>
-<img src = "img/demo.png">
 </div>
 
 ## About Project
@@ -15,6 +14,8 @@ src
     ├─page
     | # all pge 
     │  ├─dashboard
+    │  │  └─components
+    |  ├─setting
     │  │  └─components
     │  └─home
     │      ├─components
