@@ -17,12 +17,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
+/*
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
+*/
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
   const [expanded, setExpanded] = React.useState(false);
@@ -94,15 +95,17 @@ const ClassDashBoard = () => {
           setOpen("");
           handleClose();
           /*
-            firebase
-            .firestore()
-            .collection("class")
-            .doc(classname.id)
-            .delete()
+            
          */
         }
 
         const handleClickOpen = () => {
+          firebase
+            .firestore()
+            .collection("class")
+            .doc(classname.id)
+            .delete()
+            
           setOpen(`${classname.id}`);
         };
 
@@ -215,28 +218,7 @@ const ClassDashBoard = () => {
                     >
                       <DeleteIcon></DeleteIcon>
                     </IconButton>
-                    <Dialog
-                      //open= {({ opendialog }) => (opendialog === `${classname.id}` ? false : true)}
-                      onClose={handleClose}
-                    >
-                      <DialogTitle>
-                        {"確定要刪除 "}
-                        {classname.name}
-                      </DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          {"如果您刪除該班，這筆資料無法復原"}
-                        </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button autoFocus onClick={toggledelete}>
-                          <DeleteIcon></DeleteIcon>
-                        </Button>
-                        <Button autoFocus onClick={handleClose}>
-                          取消
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
+                   
                   </ListItem>
                 </List>
               </AccordionDetails>

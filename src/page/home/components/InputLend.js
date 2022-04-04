@@ -40,7 +40,9 @@ const InputLend = () => {
     setBall(newBall);
   };
 
-  const lendball = () => {
+  const lendball = (event) => {
+    event.preventDefault();
+
     console.log(`${id.id} ${ball} ${ballnum}  ${racket}`);
 
     if (ball === "volleyball") {
@@ -73,6 +75,8 @@ const InputLend = () => {
           },
         });
     }
+
+
   };
 
   return (
@@ -82,7 +86,10 @@ const InputLend = () => {
       >
         <h1>借</h1>
         <>
-          <form style={{ overflow: "hidden" }}>
+          <form 
+            style={{}}
+            onSubmit={lendball}
+            >
             <ToggleButtonGroup
               color="primary"
               value={ball}
@@ -142,7 +149,6 @@ const InputLend = () => {
 
             <Button
               type="submit"
-              onClick={lendball}
               sx={{
                 fontSize: "25px",
                 color: "#ffffff",

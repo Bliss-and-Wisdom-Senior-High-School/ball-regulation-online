@@ -18,7 +18,7 @@ const Space = styled.div`
 
 const min = 0;
 
-const InputLend = () => {
+const InputReturn = () => {
   const [ball, setBall] = useState("volleyball");
   const [classnames, setClassnames] = useState([]);
   const [name, setName] = useState("");
@@ -117,7 +117,7 @@ const InputLend = () => {
     </Space>
   );
 };
-export default InputLend;
+export default InputReturn;
 /*
 const test = () =>{
     <Form>

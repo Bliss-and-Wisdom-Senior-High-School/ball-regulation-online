@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 import { Button } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { useState, useEffect } from "react";
