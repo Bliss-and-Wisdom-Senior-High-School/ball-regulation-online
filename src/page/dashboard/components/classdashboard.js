@@ -69,14 +69,13 @@ const ClassDashBoard = () => {
         }
 
         function togglebaned() {
-          setExpanded("");
           if (classname.ban === true) {
             firebase
               .firestore()
               .collection("class")
               .doc(classname.id)
               .update({ ban: false });
-          } else if (classname.ban === false && classname.point.bad > 3) {
+          } else if (classname.ban === false && classname.point.bad >= 3) {
             firebase
               .firestore()
               .collection("class")
@@ -84,7 +83,7 @@ const ClassDashBoard = () => {
               .update({
                 ban: true,
                 point: {
-                  good: classname.point.good + 1,
+                  good: classname.point.good,
                   bad: classname.point.bad - 3,
                 },
               });
@@ -100,12 +99,8 @@ const ClassDashBoard = () => {
         }
 
         const handleClickOpen = () => {
-          firebase
-            .firestore()
-            .collection("class")
-            .doc(classname.id)
-            .delete()
-            
+          firebase.firestore().collection("class").doc(classname.id).delete();
+
           setOpen(`${classname.id}`);
         };
 
@@ -218,7 +213,6 @@ const ClassDashBoard = () => {
                     >
                       <DeleteIcon></DeleteIcon>
                     </IconButton>
-                   
                   </ListItem>
                 </List>
               </AccordionDetails>

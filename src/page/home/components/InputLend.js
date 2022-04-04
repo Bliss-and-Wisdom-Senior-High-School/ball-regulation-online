@@ -75,8 +75,6 @@ const InputLend = () => {
           },
         });
     }
-
-
   };
 
   return (
@@ -86,10 +84,7 @@ const InputLend = () => {
       >
         <h1>借</h1>
         <>
-          <form 
-            style={{}}
-            onSubmit={lendball}
-            >
+          <form style={{}} onSubmit={lendball}>
             <ToggleButtonGroup
               color="primary"
               value={ball}

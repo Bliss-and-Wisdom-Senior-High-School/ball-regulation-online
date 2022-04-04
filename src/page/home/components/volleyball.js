@@ -4,13 +4,11 @@ import "firebase/firestore";
 import firebase from "../../../utils/firebase";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import { Typography } from "@mui/material";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
-import { ButtonGroup } from "@mui/material";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
-const InputPoint = () => {
+const VolleyBall = () => {
   const [classnames, setClassnames] = useState([]);
 
   useEffect(() => {
@@ -41,46 +39,53 @@ const InputPoint = () => {
   return (
     <Stack spacing={2} sx={{ p: "14%" }}>
       {classnames.map((classname) => {
-        const AddGoodPoint = () => {
+        const Lend = () => {
           firebase
             .firestore()
             .collection("class")
             .doc(classname.id)
             .update({
-              point: {
-                good: classname.point.good + 1,
-                bad: classname.point.bad,
+              volleyball: {
+                ball: classname.volleyball.ball + 1,
               },
             });
         };
 
-        const AddBadPoint = () => {
-          firebase
-            .firestore()
-            .collection("class")
-            .doc(classname.id)
-            .update({
-              point: {
-                good: classname.point.good,
-                bad: classname.point.bad + 1,
-              },
-            });
+        const Return = () => {
+          if (classname.volleyball.ball >= 1) {
+            firebase
+              .firestore()
+              .collection("class")
+              .doc(classname.id)
+              .update({
+                volleyball: {
+                  ball: classname.volleyball.ball - 1,
+                },
+              });
+          } else {
+          }
         };
 
         return (
           <div key={classname.id}>
-            <Card>
+            <Card sx={{ p: "10px" }}>
               <Typography variant="h5">{classname.name}</Typography>
               <ButtonGroup>
-                <IconButton onClick={AddGoodPoint}>
-                  <ThumbUpAltIcon></ThumbUpAltIcon>
-                  {classname.point.good}
-                </IconButton>
-                <Typography sx={{pr: "10px", pl: "10px"}}></Typography>
-                <IconButton onClick={AddBadPoint}>
-                  <ThumbDownAltIcon></ThumbDownAltIcon>
-                  {classname.point.bad}
-                </IconButton>
+                <Button
+                  color="info"
+                  //fullWidth={false}
+                  onClick={Lend}
+                  variant="text"
+                >
+                  <Typography>借</Typography>
+                </Button>
+                <Typography variant="h6" sx={{ pl: "7px", pr: "7px" }}>
+                  球數:{classname.volleyball.ball}
+                </Typography>
+
+                <Button variant="text" onClick={Return} color="info">
+                  <Typography>還</Typography>
+                </Button>
               </ButtonGroup>
             </Card>
           </div>
@@ -90,4 +95,4 @@ const InputPoint = () => {
   );
 };
 
-export default InputPoint;
+export default VolleyBall;
