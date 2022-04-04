@@ -5,7 +5,7 @@ import VolleyBall from "./volleyball";
 import InputPoint from "./InputPoint";
 import Badminton from "./badminton";
 import TableTennis from "./tabletennis";
-import Typography  from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 
 const OptionEffect = (props) => {
   const type = props.alignment;
@@ -31,10 +31,18 @@ const Option = () => {
         exclusive
         onChange={handleChange}
       >
-        <ToggleButton value="point"><Typography>點數</Typography></ToggleButton>
-        <ToggleButton value="badminton"><Typography>羽球</Typography></ToggleButton>
-        <ToggleButton value="volleyball"><Typography>排球</Typography></ToggleButton>
-        <ToggleButton value="tabletennis"><Typography>桌球</Typography></ToggleButton>
+        <ToggleButton value="point">
+          <Typography>點數</Typography>
+        </ToggleButton>
+        <ToggleButton value="badminton">
+          <Typography>羽球</Typography>
+        </ToggleButton>
+        <ToggleButton value="volleyball">
+          <Typography>排球</Typography>
+        </ToggleButton>
+        <ToggleButton value="tabletennis">
+          <Typography>桌球</Typography>
+        </ToggleButton>
       </ToggleButtonGroup>
       <OptionEffect alignment={alignment} />
     </>

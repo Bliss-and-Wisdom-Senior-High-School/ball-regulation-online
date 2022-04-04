@@ -10,3 +10,5 @@ ReactDOM.render(
   </StrictMode>,
   rootElement
 );
+
+//serviceWorker.register();

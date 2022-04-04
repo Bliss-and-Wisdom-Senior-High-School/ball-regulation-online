@@ -76,7 +76,7 @@ const InputPoint = () => {
                   <ThumbUpAltIcon></ThumbUpAltIcon>
                   {classname.point.good}
                 </IconButton>
-                <Typography sx={{pr: "10px", pl: "10px"}}></Typography>
+                <Typography sx={{ pr: "10px", pl: "10px" }}></Typography>
                 <IconButton onClick={AddBadPoint}>
                   <ThumbDownAltIcon></ThumbDownAltIcon>
                   {classname.point.bad}

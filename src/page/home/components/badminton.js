@@ -27,7 +27,6 @@ const Badminton = () => {
   return (
     <Stack spacing={2} sx={{ p: "14%" }}>
       {classnames.map((classname) => {
-
         const LendRacket = () => {
           firebase
             .firestore()
@@ -79,7 +78,7 @@ const Badminton = () => {
               .update({
                 badminton: {
                   ball: classname.badminton.ball - 1,
-                  racket: classname.badminton.racket
+                  racket: classname.badminton.racket,
                 },
               });
           } else {
@@ -91,11 +90,7 @@ const Badminton = () => {
             <Card sx={{ p: "10px" }}>
               <Typography variant="h5">{classname.name}</Typography>
               <ButtonGroup>
-                <Button
-                  color="info"
-                  onClick={LendBall}
-                  variant="text"
-                >
+                <Button color="info" onClick={LendBall} variant="text">
                   <Typography>借</Typography>
                 </Button>
                 <Typography variant="h6" sx={{ pl: "7px", pr: "7px" }}>

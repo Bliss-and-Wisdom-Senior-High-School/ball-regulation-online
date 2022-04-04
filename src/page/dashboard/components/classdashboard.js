@@ -16,7 +16,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 /*
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -90,13 +90,11 @@ const ClassDashBoard = () => {
           }
         }
 
-        function toggledelete() {
+      /* function toggledelete() {
           setOpen("");
           handleClose();
-          /*
-            
-         */
         }
+        */
 
         const handleClickOpen = () => {
           firebase.firestore().collection("class").doc(classname.id).delete();
