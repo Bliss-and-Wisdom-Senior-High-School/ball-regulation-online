@@ -90,8 +90,8 @@ const AddClass = () => {
               setName(e.target.value);
             }}
             required
-          ></TextField>
-          <h1></h1>
+          />
+          <br></br>
           <Button
             type="submit"
             sx={{

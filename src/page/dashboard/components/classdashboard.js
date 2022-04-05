@@ -27,7 +27,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 const ClassDashBoard = () => {
   const [classnames, setClassnames] = useState([]);
   const [expanded, setExpanded] = React.useState(false);
-  const [opendialog, setOpen] = useState("");
+  //const [opendialog, setOpen] = useState("");
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -99,12 +99,8 @@ const ClassDashBoard = () => {
         const handleClickOpen = () => {
           firebase.firestore().collection("class").doc(classname.id).delete();
 
-          setOpen(`${classname.id}`);
         };
 
-        const handleClose = () => {
-          setOpen("");
-        };
         return (
           <div key={classname.id}>
             <Accordion
