@@ -1,6 +1,7 @@
 <div align="center">
 <img align="center" width="300" height="300" src = "src/components/imgs/table-tennis.svg"></img>
 <h1 align="center">Ball Regulation</h1>
+<img align="center" width="485" height="347" src = "img/v1.0.0.png"></img>
 </div>
 
 ## About Project
