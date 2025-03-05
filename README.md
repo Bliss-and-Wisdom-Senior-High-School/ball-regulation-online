@@ -42,4 +42,4 @@ src
 
 ## Future Plan
 
-<h4 align="center">Made with ❤️ by Bo-Chain</h4>
+<h4 align="center">Made with ❤️</h4>
